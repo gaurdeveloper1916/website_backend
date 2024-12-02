@@ -92,6 +92,11 @@ const updatePassword = async (req, res) => {
         const hashedPassword = await bcrypt.hash(newPassword, salt);
         const result = await User.updateOne({ email: email }, { password: hashedPassword })
         if (result) {
+            await sendEmail(
+                email,
+                "Welcome to Our Platform",
+                `Hi ${user.name},\n\nYour password has been changed successfully!\n\nThank you for joining us.\n\nBest regards,\nTeam`,"Password Info"
+            );
             res.send({ success: true, message: "Password updated successfully" })
 
         }
