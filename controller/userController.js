@@ -100,7 +100,7 @@ const updatePassword = async (req, res) => {
             res.send({ success: true, message: "Password updated successfully" })
 
         }
-    } catch (error) {
+} catch (error) {   
         return { success: false, message: error.message };
     }
 };
