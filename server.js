@@ -1,15 +1,25 @@
-const userRoutes = require("./routes/userRoutes");
+const express = require("express");
+const cors = require("cors"); 
 const dotenv = require("dotenv");
-
-const express = require('express');
+const userRoutes = require("./routes/userRoutes");
 const connectDB = require("./config/db");
+
+dotenv.config();
+
 const app = express();
 
-app.use(express.json()); // to accept json data
-dotenv.config();
 connectDB();
-console.log(process.env.JWT_SECRET)
+
+app.use(express.json());
+
+app.use(
+    cors({
+        origin: "*", 
+        methods: ["GET", "POST", "PUT", "DELETE"], 
+        allowedHeaders: ["Content-Type", "Authorization"], 
+    })
+);
+
 app.use("/api/user", userRoutes);
 
-
-app.listen(5000,console.log('server is running'))
+app.listen(5000, () => console.log("Server is running on port 5000"));
