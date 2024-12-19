@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors"); 
 const dotenv = require("dotenv");
 const userRoutes = require("./routes/userRoutes");
+const paymentRoutes = require("./routes/paymentRoutes")
 const connectDB = require("./config/db");
 
 dotenv.config();
@@ -21,5 +22,6 @@ app.use(
 );
 
 app.use("/api/user", userRoutes);
+app.use("/api/payment",paymentRoutes)
 
-app.listen(5000, () => console.log("Server is running on port 5000"));
+app.listen(5500, () => console.log("Server is running on port 5500"));
